@@ -48,7 +48,6 @@ const SignUp = ({ setUser }) => {
                     value={name}
                     onChange={handleChange}
                 />
-    
             <label>Email</label>
                 <input 
                     type="text"

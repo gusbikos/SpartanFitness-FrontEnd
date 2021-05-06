@@ -1,13 +1,11 @@
-import axios from "axios"
 import React, { useState } from "react"
-
+import axios from "axios"
 const Profile = ({ user, setUser }) =>  {
     const [formData, setFormData] = useState({
         name: user.name,
         email: user.email,
         password: user.password,
     })
-
 
     const handleChange = (e) => {
         setFormData({
@@ -29,37 +27,40 @@ const Profile = ({ user, setUser }) =>  {
       // update the user object in state
     }
 
+
     const { name, email, password }  = formData
 
     return (
-        <form onSubmit={handleSubmit}>
-        <h1>{user.name}'s Profile</h1>
-        <label>Edit name</label>
-            <input
-                type="text"
-                name="name"
-                autoComplete="off"
-                value={name}
-                onChange={handleChange}
-            />
-        <label>Edit email</label>
-            <input
-                type="email"
-                name="email"
-                autoComplete="off"
-                value={email}    
-                onChange={handleChange}
-            />
-        <label>Change Password</label>
-            <input
-                type="password"
-                name="password"
-                autoComplete="current-password"
-                value={password}    
-                onChange={handleChange}
-            />
-        <input type="submit" value="Update" />
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+            <h1>{user.name}'s Profile</h1>
+            <label>Edit name</label>
+                <input
+                    type="text"
+                    name="name"
+                    autoComplete="off"
+                    value={name}
+                    onChange={handleChange}
+                />
+            <label>Edit email</label>
+                <input
+                    type="email"
+                    name="email"
+                    autoComplete="off"
+                    value={email}    
+                    onChange={handleChange}
+                />
+            <label>Change Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    autoComplete="current-password"
+                    value={password}    
+                    onChange={handleChange}
+                />
+            <input type="submit" value="Update" />
+            </form>
+        </div>
     )
 }
 
