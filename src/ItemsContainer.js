@@ -1,29 +1,24 @@
 import React from "react"
 import ItemCard from "./ItemCard"
-// import CartItems from "./CartItems"
-// import { useState, useEffect } from "react"
 
-const ItemsContainer = ({ id, items, cartItems, setCartItems, addToCart }) => {
-    console.log(items)
+const ItemsContainer = ({ items, addToCart }) => {
+    // console.log(items)
+    // USE ALERT LOOK IT UP
 
-    const allItems = items.map((item) => {
+    const allItems = items.map((item , index) => {
         return (
         <ItemCard
-            key={item.id}
+            key={index}
             item={item}
-            // cartItems={cartItems}
-            // setCartItems={setCartItems}
             addToCart={addToCart}
         />
         )
     })
 
     return (
-        <>
             <div className="products">
                 {allItems}
             </div>
-        </>
     )
 
 }

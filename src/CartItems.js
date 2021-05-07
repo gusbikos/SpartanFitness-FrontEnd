@@ -1,22 +1,25 @@
 import React from "react"
 import Cart from "./Cart"
 
-const CartItems = ({ items, cartItems, setCartItems }) => {
-    console.log(cartItems)
-
-    const allCartItems = cartItems.map((cartItem, index) => {
+const CartItems = ({ items, cartItems, deleteItems, adjustItems }) => {
+    
+    const allCartItems = cartItems.map((cartItem) => {
         return (
             <Cart
-                key={index}
+                key={cartItem.id}
                 cartItem={cartItem}
+                deleteItems={deleteItems}
+                adjustItems={adjustItems}
+                item={cartItem.item}
             />
         )
     })
 
     return (
         <div className="products">
-            {allCartItems}
+            {cartItems ? allCartItems : null}
         </div>
+        
     )
 }
 

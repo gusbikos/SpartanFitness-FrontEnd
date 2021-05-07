@@ -1,11 +1,18 @@
 import React from "react"
 
-const ItemCard = ({ item, addToCart  }) => {
+const ItemCard = ({ item, addToCart }) => {
     const { name, price, description, quantity, image } = item
-    // console.log(item)
+    // console.log(adjustQuantity)
 
     const addCartItems = () => {
+        // console.log(item)
         addToCart(item) 
+    }
+
+    const checkQuantity = () => {
+        if ( quantity === 0 ) {
+            return "Sorry None Left"
+        }
     }
 
     return (
@@ -17,7 +24,6 @@ const ItemCard = ({ item, addToCart  }) => {
                 <h3>{description}</h3>
                 <h3> Quantity: {quantity}</h3>
                 <button onClick={() => addCartItems()}>Add To Cart</button>
-                {/* <button onClick={() => addToCart()} className="emoji-button delete">🗑</button> */}
             </div>
         </div> 
     )

@@ -79,3 +79,7 @@ a {
 .row.center {
   align-items: center;
 }
+
+.cart-iteam-header {
+  text-align: center;
+}

@@ -14,25 +14,21 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
+  const [cartTotal, setCartTotal] = useState(0)
   const [gymClasses, setGymClasses] = useState([])
-  // console.log(id)
-  // console.log(items.id)
-  // console.log(user)
-
-
 
   useEffect(() => {
     axios.get("/me").then((response) => {
-        // console.log(response.data)
-        setUser(response.data)
+      // console.log(response.data)
+      setUser(response.data)
     })
   }, [] )
 
   useEffect(() => {
     axios.get("/items").then((response) => {
-        // console.log(response.data)
-        setItems(response.data)
-      })
+      // console.log(response.data)
+      setItems(response.data)
+    })
   }, [] )
 
   useEffect(() => {
@@ -43,39 +39,54 @@ const App = () => {
 
   useEffect(() => {
     axios.get("/cart_items").then((response) => {
-      console.log(response.data);
+      // console.log(response.data.item);
       setCartItems(response.data)
     })
   }, [] )
 
-  const addToCart = (item) => {
-    console.log('I am in cart')
-    const cartItemParams = { user_id: user.id, item_id: item.id }
-    axios.post(`/cart_items`, cartItemParams).then((response) => {
-    console.log(response.data)
-    })
-    setCartItems([...cartItems, item])
+  useEffect(() => {
+    total()
+  }, [cartItems] )
+
+  const total = () => {
+    let totalVal = 0
+    for ( let i = 0; i < cartItems.length; i++) {
+      totalVal += cartItems[i].item.price
+      // console.log(totalVal)
+    }
+    setCartTotal((totalVal))
   }
 
-  const filterCartItems = (id) => {
-    const filteredItems = cartItems.filter(cartItem => cartItem.id === id)
-    // console.log(filteredItems)
-    setCartItems(filteredItems)
-}
+  const addToCart = (item) => {
+    console.log(item.quantity, "BEFORE FETCH")
+    const cartItemParams = { user_id: user.id, item_id: item.id }
+    axios.post("/cart_items", cartItemParams).then((response) => {
+      console.log(response.data.item.quantity, 'AFTER FETCH')
+      setCartItems([...cartItems, response.data])
+      const updatedItems = items.map((itemObj) => {
+        if (itemObj.id === item.id) {
+          return { ...itemObj, quantity: itemObj.quantity - 1 }
+        } else {
+          return itemObj
+          }
+      })
+      setItems(updatedItems)
+    })
+  }
 
-  // const addToCart = (item) => {
-  //   console.log('clicked')
-  //   const product = cartItems.find(cartItem => cartItem.id === item.id)
-  //   if (product) {
-  //     setCartItems(
-  //       cartItems.map((cartItem) => 
-  //         cartItem.id === item.id ? { ...product, quantity: product.quantity + 1 } : cartItem
-  //       )
-  //     )
-  //   } else {
-  //     setCartItems([...cartItems, { ...item, quantity: item.quantity }])
-  //   }
-  // }
+  const deleteItems = (item) => {
+    const removeOneItem = cartItems.filter((cartItem) => cartItem.id !== item.id)
+    console.log(item)
+    setCartItems(removeOneItem)
+    const updatedItems = items.map((itemObj) => {
+      if (itemObj.id === item.item_id) {
+        return { ...itemObj, quantity: itemObj.quantity + 1 }
+      } else {
+        return itemObj
+      }
+    })
+    setItems(updatedItems)
+  }
 
   return (
     <div className="App">
@@ -114,20 +125,25 @@ const App = () => {
           <h2>Products</h2>
             <ItemsContainer 
               items={items} 
+              setItems={setItems}
               addToCart={addToCart}
               cartItems={cartItems} 
-              setCartItems={setCartItems} 
+              setCartItems={setCartItems}
               user={user}
             />
             </div>
           </Route>
           <Route exact path="/cart_items">
             <div className="block col-2">
-              <h2>Cart</h2>
+              <h2>Cart Total: ${cartTotal}</h2>
+              <h2>Total Items: {cartItems.length}</h2>
               <CartItems
                 items={items}
+                setItems={setItems}
                 cartItems={cartItems}
                 setCartItems={setCartItems}
+                deleteItems={deleteItems}
+                cartTotal={cartTotal}
               />
             </div>
           </Route>
