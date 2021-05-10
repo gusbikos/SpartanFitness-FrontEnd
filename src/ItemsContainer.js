@@ -1,15 +1,18 @@
 import React from "react"
 import ItemCard from "./ItemCard"
 
-const ItemsContainer = ({ items, addToCart }) => {
+const ItemsContainer = ({ items, itemReviews, setItemReviews, handleAddItemReview, addToCart }) => {
     // console.log(items)
     // USE ALERT LOOK IT UP
 
-    const allItems = items.map((item , index) => {
+    const allItems = items.map((item) => {
         return (
         <ItemCard
-            key={index}
+            key={item.id}
             item={item}
+            itemReviews={itemReviews}
+            setItemReviews={setItemReviews}
+            handleAddItemReview={handleAddItemReview}
             addToCart={addToCart}
         />
         )

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
+
 const Profile = ({ user, setUser }) =>  {
     const [formData, setFormData] = useState({
         name: user.name,
@@ -26,7 +27,6 @@ const Profile = ({ user, setUser }) =>  {
       // send form data
       // update the user object in state
     }
-
 
     const { name, email, password }  = formData
 

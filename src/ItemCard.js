@@ -1,19 +1,31 @@
-import React from "react"
+// import axios from "axios"
+import CreateItemReview from "./CreateItemReview"
+import Review from "./Review"
+import React, { useState } from "react"
 
-const ItemCard = ({ item, addToCart }) => {
+
+const ItemCard = ({ item, addToCart, itemReviews, setItemReviews, handleAddItemReview }) => {
+    const [showReview, setShowReview] = useState(false)
     const { name, price, description, quantity, image } = item
-    // console.log(adjustQuantity)
 
     const addCartItems = () => {
         // console.log(item)
         addToCart(item) 
     }
 
-    const checkQuantity = () => {
-        if ( quantity === 0 ) {
-            return "Sorry None Left"
-        }
+    const handleClick = () => {
+        console.log(showReview)
+        setShowReview(!showReview)
     }
+
+    const postReview = itemReviews.map((itemReview) => {
+        return (
+            <Review
+                key={itemReview.id}
+                itemReview={itemReview}
+            />
+        )
+    })
 
     return (
         <div className="products-list">
@@ -24,6 +36,21 @@ const ItemCard = ({ item, addToCart }) => {
                 <h3>{description}</h3>
                 <h3> Quantity: {quantity}</h3>
                 <button onClick={() => addCartItems()}>Add To Cart</button>
+                <button onClick={handleClick}>Add Review</button> 
+                    { showReview ? (
+                        <div>
+                            <CreateItemReview
+                                item={item}
+                                itemReviews={itemReviews}
+                                setItemReviews={setItemReviews}
+                                handleAddItemReview={handleAddItemReview}
+                            />
+                                {postReview}
+                        </div>
+                            ) : (
+                                null
+                        )
+                    }
             </div>
         </div> 
     )

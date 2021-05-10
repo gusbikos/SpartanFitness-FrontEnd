@@ -13,6 +13,7 @@ import CartItems from './CartItems'
 const App = () => {
   const [user, setUser] = useState(null)
   const [items, setItems] = useState([])
+  const [itemReviews, setItemReviews] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [cartTotal, setCartTotal] = useState(0)
   const [gymClasses, setGymClasses] = useState([])
@@ -45,6 +46,13 @@ const App = () => {
   }, [] )
 
   useEffect(() => {
+    axios.get("/item_reviews").then((response) => {
+      console.log(response.data)
+      setItemReviews(response.data)
+    })
+  }, [] )
+
+  useEffect(() => {
     total()
   }, [cartItems] )
 
@@ -64,8 +72,9 @@ const App = () => {
       console.log(response.data.item.quantity, 'AFTER FETCH')
       setCartItems([...cartItems, response.data])
       const updatedItems = items.map((itemObj) => {
+        console.log(itemObj)
         if (itemObj.id === item.id) {
-          return { ...itemObj, quantity: itemObj.quantity - 1 }
+          return { ...itemObj, quantity: itemObj.quantity - 1 } 
         } else {
           return itemObj
           }
@@ -80,13 +89,18 @@ const App = () => {
     setCartItems(removeOneItem)
     const updatedItems = items.map((itemObj) => {
       if (itemObj.id === item.item_id) {
-        return { ...itemObj, quantity: itemObj.quantity + 1 }
+        return { ...itemObj, quantity: itemObj.quantity + 1 && itemObj.quantity <= 0 }
       } else {
-        return itemObj
+        return itemObj 
       }
     })
     setItems(updatedItems)
   }
+
+  const handleAddItemReview = (reviewObj) => {
+    const updatedItemReview = [...itemReviews, reviewObj]
+    setItemReviews(updatedItemReview)
+  } 
 
   return (
     <div className="App">
@@ -129,6 +143,9 @@ const App = () => {
               addToCart={addToCart}
               cartItems={cartItems} 
               setCartItems={setCartItems}
+              handleAddItemReview={handleAddItemReview}
+              itemReviews={itemReviews}
+              setItemReviews={setItemReviews}
               user={user}
             />
             </div>
