@@ -4,7 +4,7 @@ const ItemReview = ({ item, itemReview, setItemReview, handleAddItemReview }) =>
     const [rating, setRating] = useState("")
     const [review, setReview] = useState("")
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault()
         e.stopPropagation()
         const formData = {
@@ -30,7 +30,7 @@ const ItemReview = ({ item, itemReview, setItemReview, handleAddItemReview }) =>
     }
     
     return (
-        <div>
+        <div className="container">
         <h1>Add Review</h1>        
             <form onSubmit={handleSubmit}>
                 <label>Review: </label>

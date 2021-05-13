@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { useHistory } from "react-router-dom"
+import "./Login.css"
 
 
 const SignUp = ({ setUser }) => {
@@ -38,39 +39,41 @@ const SignUp = ({ setUser }) => {
     const { name, email, password } = formData
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Signup</h1>
-            <label>Username</label>
-                <input
-                    type="text"
-                    name="name"
-                    autoComplete="off"
-                    value={name}
-                    onChange={handleChange}
-                />
-            <label>Email</label>
-                <input 
-                    type="text"
-                    name="email" 
-                    autoComplete="off"
-                    value={email} 
-                    onChange={handleChange} 
-                />
-            <label>Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={handleChange}
-                />
-                {errors.map((error) => (
-                    <p style={{ color: "red" }} key={error}>
-                        {error}
-                    </p>
-                ))}
-            <input type="submit" value="Signup" />
-        </form>
+            <div className="login-container">
+            <form className="login-form" onSubmit={handleSubmit}>
+                <h1>Signup</h1>
+                <label>Username</label>
+                    <input
+                        type="text"
+                        name="name"
+                        autoComplete="off"
+                        value={name}
+                        onChange={handleChange}
+                    />
+                <label>Email</label>
+                    <input 
+                        type="text"
+                        name="email" 
+                        autoComplete="off"
+                        value={email} 
+                        onChange={handleChange} 
+                    />
+                <label>Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={handleChange}
+                    />
+                    {errors.map((error) => (
+                        <p style={{ color: "red" }} key={error}>
+                            {error}
+                        </p>
+                    ))}
+                <input type="submit" value="Signup" />
+            </form>
+        </div>
     )
 }
 

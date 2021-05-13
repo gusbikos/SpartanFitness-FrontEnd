@@ -1,21 +1,31 @@
-const GymClass = ({ gymClass, setGymClasses, user }) => {
-    const { time, date, booked } = gymClass
+const GymClass = ({ gymClass, setGymClasses, user, classReview }) => {
+    const { time, date, booked, style } = gymClass
+    // console.log(classReview)
 
-    console.log(gymClass.booked)
-    // console.log(user)
-
-    // const bookedClass = () => {
-    //     if (booked === true) {
-    //         return !booked
-    //     }
-    // }
+    if (user) {
+    const setReview = user.class_reviews.map((classRev) =>{
+        return (
+            <div>
+                <h5>{classRev.description}</h5>
+                <h5>{classRev.rating}</h5>
+            </div>
+        )
+    })
+    } else{
+        return (
+            <div>
+                Loading...
+            </div>
+        )
+    }
 
     return (
-        
             <div>
-                <h2>{time}</h2>
+                {/* <h2>{time}</h2>
                 <h2>{date}</h2>
                 <h2>{booked}</h2>
+                <h2>{style}</h2> */}
+                {/* {setReview} */}
             </div>
     )
 }

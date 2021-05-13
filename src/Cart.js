@@ -20,8 +20,8 @@ const Cart = ({ cartItem, deleteItems, adjustItems, item }) => {
                 <h1>{cartItem.item.price}$</h1>
                 <h2>{cartItem.item.name}</h2>
                 <h3>{cartItem.item.description}</h3>
-                <button onClick={() => removeCartItem()}>Remove</button>
-                <button onClick={() => adjustItems()}>Add +</button>
+                <button className="delete-btn" onClick={() => removeCartItem()}>Remove</button>
+                {/* <button onClick={() => adjustItems()}>Add +</button> */}
             </div>): (
                 <div>
                     Loading... Please Wait.

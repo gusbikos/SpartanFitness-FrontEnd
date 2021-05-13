@@ -11,28 +11,29 @@ const NavBar = ({ user, setUser, cartItems }) => {
 
     return (
         <header className="row block center">
-        <div>
-            <Link to="/">Home</Link>
-        </div>
-        <div>
-            <Link to="/gym_classes">Classes</Link>
-        </div>
-        <div>
-            <Link to="/items">Browse Store</Link>
-        </div>
-            {user ? (
-            <>
-                <Link to="/profile">Profile</Link> 
-                <Link to="/cart_items">Cart ({cartItems.length})</Link>
-                <Link to="/gym_classes">Scheduled Classes</Link>
-                <Link to="/"><button onClick={logout}>Logout</button></Link>
-            </>
-            ) : (
-            <>
-                <Link to="/login">Login</Link> <Link to="/signup">Signup</Link>                
-            </>
-            )}
+            <div>
+                <Link to="/">Home</Link>
+            </div>
+            <div>
+                <Link to="/gym_classes">Classes</Link>
+            </div>
+            <div>
+                <Link to="/items">Browse Store</Link>
+            </div>
+                {user ? (
+                <>
+                    <Link to="/profile">Profile</Link> 
+                    <Link to="/cart_items">Cart ({cartItems.length})</Link>
+                    {/* <Link to="/gym_classes">Scheduled Classes</Link> */}
+                    <Link to="/"><button onClick={logout}>Logout</button></Link>
+                </>
+                ) : (
+                <>
+                    <Link to="/login">Login</Link> <Link to="/signup">Signup</Link>                
+                </>
+                )}
         </header>
+        
     )
 }
 

@@ -2,8 +2,10 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import GoogleLogin from 'react-google-login'
+import "./Login.css"
+import moment from 'moment'
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, setCalendarData, }) => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -26,11 +28,23 @@ const Login = ({ setUser }) => {
                     const { user, token } = response.data
                     localStorage.setItem("token", token)
                     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
-                    setUser(user);
-                    history.push("/profile")
+                    setUser(user)
+
+                    // const acceptedData = user.gym_classes.map((classObj) => {
+                    //     return {
+                    //         id: classObj.id,
+                    //         time: classObj.time,
+                    //         date: moment.utc(classObj.date).format("YYYY-MM-DD"),
+                    //         style: classObj.style,
+                    //         booked: classObj.booked,
+                    //     }
+                    // })
+                    //     console.log(acceptedData)
+                    //     setCalendarData(acceptedData)
+                        history.push("/profile")
                 })
                 .catch((error) => {
-                setErrors(error.response.data.errors)
+                    setErrors(error.response.data.errors)
                 })
         }
     }
@@ -48,7 +62,18 @@ const Login = ({ setUser }) => {
                 localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
                 setUser(user)
-                history.push('/profile')
+                // const acceptedData = user.gym_classes.map((classObj) => {
+                //     return {
+                //         id: classObj.id,
+                //         time: classObj.time,
+                //         date: moment.utc(classObj.date).format("YYYY-MM-DD"),
+                //         style: classObj.style,
+                //         booked: classObj.booked,
+                //     }
+                // })
+                    // console.log(acceptedData)
+                    // setCalendarData(acceptedData)
+                    history.push("/profile")
             })
             .catch((error) => {
                 setErrors(error.response.data.errors)
@@ -56,31 +81,38 @@ const Login = ({ setUser }) => {
         }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleSubmit}>
             <h1>Login</h1>
             <label>Username</label>
                 <input
                     type="text"
                     name="username"
                     autoComplete="off"
+                    className="login-input"
                     value={formData.username}
                     onChange={handleChange}
+                    placeholder="username"
                 />
+
+                <br/>
+
+
             <label>Password</label>
                 <input
                     type="password"
                     name="password"
                     value={formData.password}
+                    className="login-input"
                     onChange={handleChange}
                     autoComplete="current-password"
                 />
                 {errors.map((error) => (
-                    <p style={{ color: "red" }} key={error}>
+                    <p style={{ color: "black" }} key={error}>
                         {error}
                     </p>
                 ))}
-                <input type="submit" value="Login" />
+                <input className="login-button" type="submit" value="Login" />
             </form>
             <hr />
             <GoogleLogin

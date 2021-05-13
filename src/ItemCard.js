@@ -20,10 +20,10 @@ const ItemCard = ({ item, addToCart, itemReviews, setItemReviews, handleAddItemR
 
     const postReview = itemReviews.map((itemReview) => {
         return (
-            <Review
-                key={itemReview.id}
-                itemReview={itemReview}
-            />
+                <Review
+                    key={itemReview.id}
+                    itemReview={itemReview}
+                />
         )
     })
 
@@ -45,7 +45,9 @@ const ItemCard = ({ item, addToCart, itemReviews, setItemReviews, handleAddItemR
                                 setItemReviews={setItemReviews}
                                 handleAddItemReview={handleAddItemReview}
                             />
-                                {postReview}
+                                <div>
+                                    {postReview}
+                                </div>
                         </div>
                             ) : (
                                 null

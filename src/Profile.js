@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
+import "./Login.css"
 
 const Profile = ({ user, setUser }) =>  {
     const [formData, setFormData] = useState({
@@ -31,8 +32,8 @@ const Profile = ({ user, setUser }) =>  {
     const { name, email, password }  = formData
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div  className="login-container">
+            <form className="login-form" onSubmit={handleSubmit}>
             <h1>{user.name}'s Profile</h1>
             <label>Edit name</label>
                 <input
