@@ -1,6 +1,4 @@
-const GymClass = ({ gymClass, setGymClasses, user, classReview }) => {
-    const { time, date, booked, style } = gymClass
-    // console.log(classReview)
+const GymClass = ({ user }) => {
 
     if (user) {
     const setReview = user.class_reviews.map((classRev) =>{

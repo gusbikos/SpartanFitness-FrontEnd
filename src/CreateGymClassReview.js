@@ -1,16 +1,8 @@
-import React, { useState } from "react"
 import axios from "axios"
 
-const CreateGymClassReview = ({ classRev, setItemReviews, user, deleteReviews }) => {
+const CreateGymClassReview = ({ classRev, user, deleteReviews }) => {
     console.log(classRev)
     const { id, description, rating } = classRev
-    // console.log(classRev)
-    const [showGymReview, setShowGymReview] = useState(false)
-
-    const handleClick = () => {
-        // console.log(showGymReview)
-        setShowGymReview(!showGymReview)
-    }
 
     const removeReview = () => {
         const classRevId = classRev.id

@@ -1,14 +1,10 @@
 import axios from "axios"
 import React, { useState } from "react"
 
-const GymClassReview = ({ handleClassReview, classReview, setClassReview, user, gymClasses }) => {
+const GymClassReview = ({ handleClassReview, user }) => {
     const [description, setDescription] = useState("")
     const [rating, setRating] = useState("")
-    const [showGymReview, setShowGymReview] = useState(false)
-    // console.log(user.class_reviews)
 
-
-    
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -16,18 +12,12 @@ const GymClassReview = ({ handleClassReview, classReview, setClassReview, user, 
             description: description,
             rating: parseInt(rating),
             user_id: parseInt(user.id),
-            // class_review: user.class_reviews
         }
 
         axios.post("/class_reviews", formData).then((response) => {
             console.log(response.data)
             handleClassReview(response.data)
         })
-    }
-
-    const handleClick = () => {
-        // console.log(showGymReview)
-        setShowGymReview(!showGymReview)
     }
 
     return (

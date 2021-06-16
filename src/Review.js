@@ -1,6 +1,4 @@
-import axios from "axios"
-
-const Review = ({ itemReview, setItemReview }) => {
+const Review = ({ itemReview }) => {
     const { review, rating } = itemReview
 
     return ( 

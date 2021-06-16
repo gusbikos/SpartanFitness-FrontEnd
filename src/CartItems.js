@@ -1,9 +1,7 @@
 import React from "react"
 import Cart from "./Cart"
-import { useState } from "react"
-// import { useHistory } from "react-router-dom"
 
-const CartItems = ({ items, cartItems, setCartItems, deleteItems, adjustItems }) => {
+const CartItems = ({ cartItems, deleteItems, adjustItems }) => {
     
     const allCartItems = cartItems.map((cartItem) => {
         return (

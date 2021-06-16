@@ -18,15 +18,12 @@ const Profile = ({ user, setUser }) =>  {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-      // TODO: update the user's profile
-      // PATCH /me
+
         axios.patch("/me", formData)
         .then((response) => {
             console.log(response);
             setUser(response.data)
         })
-      // send form data
-      // update the user object in state
     }
 
     const { name, email, password }  = formData

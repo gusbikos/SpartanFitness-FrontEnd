@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Route, Switch, } from 'react-router-dom'
 import axios from 'axios'
-import './App.css'
 import NavBar from './NavBar'
 import Login from './Login'
 import SignUp from './SignUp'
@@ -9,10 +8,9 @@ import Profile from './Profile'
 import GymClassContainer from './GymClassContainer'
 import ItemsContainer from './ItemsContainer'
 import CartItems from './CartItems'
-import HomePage from './HomePage'
 // import 'react-calendar/dist/Calendar.css'
 // import Calendar from 'react-calendar'
-import moment from 'moment'
+// import moment from 'moment'  - Woud like to revisit this. 
 import { useHistory } from "react-router-dom"
 
 const App = () => {
@@ -29,7 +27,6 @@ const App = () => {
 
   useEffect(() => {
     axios.get("/me").then((response) => {
-      // console.log(response.data.gym_classes)
       setUser(response.data)
 
       // const acceptedData = response.data.gym_classes.map((classObj) => {
@@ -42,7 +39,7 @@ const App = () => {
       //   }
       // })
       // console.log(acceptedData)
-      // setCalendarData(acceptedData)
+      // setCalendarData(acceptedData)  - can be used for moment need to revisit
     })
   }, [] )
 
@@ -61,14 +58,12 @@ const App = () => {
 
   useEffect(() => {
     axios.get("/cart_items").then((response) => {
-      // console.log(response.data.item);
       setCartItems(response.data)
     })
   }, [] )
 
   useEffect(() => {
     axios.get("/item_reviews").then((response) => {
-      // console.log(response.data)
       setItemReviews(response.data)
     })
   }, [] )
@@ -81,7 +76,6 @@ const App = () => {
     let totalVal = 0
     for ( let i = 0; i < cartItems.length; i++) {
       totalVal += cartItems[i].item.price
-      // console.log(totalVal)
     }
     setCartTotal((totalVal))
   }
@@ -93,7 +87,6 @@ const App = () => {
       console.log(response.data.item.quantity, 'AFTER FETCH')
       setCartItems([...cartItems, response.data])
       const updatedItems = items.map((itemObj) => {
-        // console.log(itemObj)
         if (itemObj.id === item.id) {
           return { ...itemObj, quantity: itemObj.quantity - 1 } 
         } else {
@@ -135,7 +128,7 @@ const App = () => {
   //   // axios.post("/")
   //   const updatedClasses = [...gymClasses, date]
   //   setGymClasses(updatedClasses) 
-  //   console.log(updatedClasses)
+  //   console.log(updatedClasses)  - used for moment will revisit
   // }
 
   return (
@@ -164,8 +157,6 @@ const App = () => {
                 <Profile 
                   user={user} 
                   setUser={setUser}
-                  setCalendarData={setCalendarData}
-                  calendarData={calendarData}
                 />
                 ) : ( 
                 <h1> You must login to see this page!</h1>
@@ -176,16 +167,14 @@ const App = () => {
               value={date}
               onChange={onChange}
             />
-              {console.log(date)}
-              {date.toString()}  */}
+              {date.toString()}   used with moment will revisit */} 
             <GymClassContainer 
               gymClasses={gymClasses} 
               setGymClasses={setGymClasses} 
               user={user}
               setItemReviews={setItemReviews}
-              itemReviews={itemReviews}
               // date={date}
-              // setDate={setDate}
+              // setDate={setDate} - passed down state for moment will revisit
             />
           </Route>
           <Route exact path="/items">
@@ -193,14 +182,10 @@ const App = () => {
               <h2>Products</h2>
               <ItemsContainer 
                 items={items} 
-                setItems={setItems}
                 addToCart={addToCart}
-                cartItems={cartItems} 
-                setCartItems={setCartItems}
                 handleAddItemReview={handleAddItemReview}
                 itemReviews={itemReviews}
                 setItemReviews={setItemReviews}
-                user={user}
               />
             </div>
           </Route>
@@ -210,10 +195,8 @@ const App = () => {
               <h2>Total Items: {cartItems.length}</h2>
               <button className="button" onClick={handlePurchase}>Make Purchase</button>
               <CartItems
-                items={items}
                 setItems={setItems}
                 cartItems={cartItems}
-                setCartItems={setCartItems}
                 deleteItems={deleteItems}
                 cartTotal={cartTotal}
               />

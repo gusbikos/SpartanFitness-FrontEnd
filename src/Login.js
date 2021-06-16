@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import GoogleLogin from 'react-google-login'
 import "./Login.css"
-import moment from 'moment'
 
 const Login = ({ setUser, setCalendarData, }) => {
     const [formData, setFormData] = useState({
@@ -16,7 +15,6 @@ const Login = ({ setUser, setCalendarData, }) => {
     console.log(errors)
 
     const responseGoogle = (response) => {
-        // console.log(response.tokenId)
         if (response.tokenId) {
             axios
                 .post("/login/google", null, {
@@ -30,7 +28,7 @@ const Login = ({ setUser, setCalendarData, }) => {
                     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
                     setUser(user)
 
-                    // const acceptedData = user.gym_classes.map((classObj) => {
+                    // const acceptedData = user.gym_classes.map((classObj) => {    -  used with moment will revisit
                     //     return {
                     //         id: classObj.id,
                     //         time: classObj.time,
@@ -62,7 +60,7 @@ const Login = ({ setUser, setCalendarData, }) => {
                 localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
                 setUser(user)
-                // const acceptedData = user.gym_classes.map((classObj) => {
+                // const acceptedData = user.gym_classes.map((classObj) => {  -- used with moment will revisit
                 //     return {
                 //         id: classObj.id,
                 //         time: classObj.time,
@@ -94,10 +92,7 @@ const Login = ({ setUser, setCalendarData, }) => {
                     onChange={handleChange}
                     placeholder="username"
                 />
-
                 <br/>
-
-
             <label>Password</label>
                 <input
                     type="password"

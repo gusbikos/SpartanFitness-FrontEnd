@@ -1,4 +1,3 @@
-// import axios from "axios"
 import CreateItemReview from "./CreateItemReview"
 import Review from "./Review"
 import React, { useState } from "react"
@@ -9,12 +8,10 @@ const ItemCard = ({ item, addToCart, itemReviews, setItemReviews, handleAddItemR
     const { name, price, description, quantity, image } = item
 
     const addCartItems = () => {
-        // console.log(item)
         addToCart(item) 
     }
 
     const handleClick = () => {
-        console.log(showReview)
         setShowReview(!showReview)
     }
 

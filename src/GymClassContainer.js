@@ -5,37 +5,32 @@ import GymClassReview from './GymClassReview'
 import CreateGymClassReview from './CreateGymClassReview'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import moment from 'moment'
+// import moment from 'moment'
 import axios from 'axios'
 
-const GymClassContainer = ({ gymClasses, setGymClasses, user, itemReviews, setItemReviews, date, setDate, calendarData }) => {
+const GymClassContainer = ({ gymClasses, setGymClasses, user, setItemReviews }) => {
     const [calendarClickId, setCalendarClickId] = useState("")
     const [classReview, setClassReview] = useState([])
-    // console.log(showGymReview)
 
     useEffect(() => {
         axios.get("/class_reviews").then((response) => {
-            // console.log(response.data)
             setClassReview(response.data)
         })
     }, [] )
 
     const handleClassReview = (classReviewObj) => {
         const updatedClassReview = [...classReview, classReviewObj]
-        console.log(updatedClassReview)
         setClassReview(updatedClassReview)
     }
 
     
     const setReview = () => {
         return classReview.map((classRev) =>{
-        // console.log(classRev)
             return (
                 <div>
                     <CreateGymClassReview
                         key={classRev.id}
                         classRev={classRev}
-                        setItemReviews={setItemReviews}
                         deleteReviews={deleteReviews}
                         user={user}
                     />
@@ -51,13 +46,10 @@ const GymClassContainer = ({ gymClasses, setGymClasses, user, itemReviews, setIt
                         <div>
                             <GymClass
                                 key={gymClass.id}
-                                gymClass={gymClass}
                                 user={user}
-                                setGymClasses={setGymClasses}
                                 // date={date}
                                 // setDate={setDate}
                                 handleClassReview={handleClassReview}
-                                classReview={classReview}
                             />
                         </div>
                     </div>
@@ -99,14 +91,9 @@ const GymClassContainer = ({ gymClasses, setGymClasses, user, itemReviews, setIt
     //     )
     // })
 
-    // const handleClick = () => {
-    //     // console.log(showGymReview)
-    //     setShowGymReview(!showGymReview)
-    // }
 
     const handleDateClick = (title) => {
         setCalendarClickId(title)
-        console.log(title)
     }
 
     return (
@@ -196,11 +183,8 @@ const GymClassContainer = ({ gymClasses, setGymClasses, user, itemReviews, setIt
             <div>
                 <GymClassReview
                     user={user}
-                    gymClasses={gymClasses}
                     handleClassReview={handleClassReview}
                     key={classReview.id}
-                    classReview={classReview}
-                    setClassReview={setClassReview}
                 />
             </div>
             { user ? (
@@ -211,9 +195,7 @@ const GymClassContainer = ({ gymClasses, setGymClasses, user, itemReviews, setIt
                 </div>
             )
         }
-                
         </div>
-
     )
 }
 

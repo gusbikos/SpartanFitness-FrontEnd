@@ -2,8 +2,6 @@ import axios from "axios"
 import React from "react"
 
 const Cart = ({ cartItem, deleteItems, adjustItems, item }) => {
-    // console.log(cartItem)
-    // const { image, price, name, description } = cartItem.item
 
     const removeCartItem = () => {
         const cartItemId = cartItem.id

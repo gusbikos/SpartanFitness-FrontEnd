@@ -3,8 +3,6 @@ import ItemCard from "./ItemCard"
 
 const ItemsContainer = ({ items, itemReviews, setItemReviews, handleAddItemReview, addToCart }) => {
 
-    // USE ALERT LOOK IT UP
-
     const allItems = items.map((item) => {
         
         return (
