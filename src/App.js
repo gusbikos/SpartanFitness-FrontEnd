@@ -80,10 +80,8 @@ const App = () => {
   }
 
   const addToCart = (item) => {
-    console.log(item.quantity, "BEFORE FETCH")
     const cartItemParams = { user_id: user.id, item_id: item.id }
     axios.post("/cart_items", cartItemParams).then((response) => {
-      console.log(response.data.item.quantity, 'AFTER FETCH')
       setCartItems([...cartItems, response.data])
       const updatedItems = items.map((itemObj) => {
         if (itemObj.id === item.id) {
@@ -98,7 +96,6 @@ const App = () => {
 
   const deleteItems = (item) => {
     const removeOneItem = cartItems.filter((cartItem) => cartItem.id !== item.id)
-    console.log(item)
     setCartItems(removeOneItem)
     const updatedItems = items.map((itemObj) => {
       if (itemObj.id === item.item_id) {
