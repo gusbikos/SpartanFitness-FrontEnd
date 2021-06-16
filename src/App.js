@@ -45,7 +45,6 @@ const App = () => {
 
   useEffect(() => {
     axios.get("/items").then((response) => {
-      // console.log(response.data)
       setItems(response.data)
     })
   }, [] )
