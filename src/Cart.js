@@ -1,7 +1,7 @@
 import axios from "axios"
 import React from "react"
 
-const Cart = ({ cartItem, deleteItems, adjustItems, item }) => {
+const Cart = ({ cartItem, deleteItems, item }) => {
 
     const removeCartItem = () => {
         const cartItemId = cartItem.id
@@ -19,7 +19,6 @@ const Cart = ({ cartItem, deleteItems, adjustItems, item }) => {
                 <h2>{cartItem.item.name}</h2>
                 <h3>{cartItem.item.description}</h3>
                 <button className="delete-btn" onClick={() => removeCartItem()}>Remove</button>
-                {/* <button onClick={() => adjustItems()}>Add +</button> */}
             </div>): (
                 <div>
                     Loading... Please Wait.

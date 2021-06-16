@@ -1,7 +1,7 @@
 import React from "react"
 import Cart from "./Cart"
 
-const CartItems = ({ cartItems, deleteItems, adjustItems }) => {
+const CartItems = ({ cartItems, deleteItems }) => {
     
     const allCartItems = cartItems.map((cartItem) => {
         return (
@@ -9,7 +9,6 @@ const CartItems = ({ cartItems, deleteItems, adjustItems }) => {
                 key={cartItem.id}
                 cartItem={cartItem}
                 deleteItems={deleteItems}
-                adjustItems={adjustItems}
                 item={cartItem.item}
             />
         )
